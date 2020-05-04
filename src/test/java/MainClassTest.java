@@ -87,8 +87,6 @@ public class MainClassTest {
         Assert.assertEquals(receivedText,textToSend);
         driver.quit();
 
-
-
     }
 
 

@@ -25,8 +25,7 @@ public class GetNada {
         driver.get("https://getnada.com/");
         WebDriverWait wait = new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.presenceOfElementLocated(generatedEmail));
-        String Email = driver.findElement(generatedEmail).getText();
-        return Email;
+        return driver.findElement(generatedEmail).getText();
     }
     public String getText(String emailOfSender){
         WebDriverWait wait = new WebDriverWait(driver,30);
@@ -60,7 +59,6 @@ public class GetNada {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         return Email;
     }
