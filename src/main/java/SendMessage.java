@@ -1,10 +1,8 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Set;
 
 public class SendMessage {
     private WebDriver driver;
@@ -17,37 +15,34 @@ public class SendMessage {
     private By passwordField = By.xpath("//input[@type=\"password\"][@name=\"password\"]");
     private By confirmPassword = By.xpath("//div[@id=\"passwordNext\"]");
     private By createMessage = By.xpath("//div[@gh=\"cm\"]");
-    private By receiverField = By.xpath("//textarea[@id=\":9k\"]");
-    private By emailTextField = By.xpath("//div[@id=\":a7\"]");
-    private By sendButton = By.xpath("//div[@id=\":8s\"]");
+    private By receiverField = By.xpath("//textarea[@name=\"to\"]");
+    private By emailTextField = By.xpath("//div[@aria-label=\"Message Body\"]");
+    private By sendButton = By.xpath("//div[text()[contains(.,\"Send\")]][@role=\"button\"]");
 
+    public SendMessage sendKeys(By xpath,String keys){
+        WebDriverWait wait = new WebDriverWait(driver,15);
+        wait.until(ExpectedConditions.presenceOfElementLocated(xpath));
+        driver.findElement(xpath).sendKeys(keys);
+        return this;
+    }
     public SendMessage sendMessage(String email,String password,String generatedEmail,String emailText) {
 
         WebDriverWait wait = new WebDriverWait(driver,15);
-        wait.until(ExpectedConditions.presenceOfElementLocated(emailField));
-        driver.findElement(emailField).sendKeys(email);
+        sendKeys(emailField,email);
         driver.findElement(confirmEmail).click();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(passwordField));
-        driver.findElement(passwordField).sendKeys(password);
+        sendKeys(passwordField,password);
         driver.findElement(confirmPassword).click();
 
         wait.until(ExpectedConditions.presenceOfElementLocated(createMessage));
         driver.findElement(createMessage).click();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(receiverField));
-        driver.findElement(receiverField).sendKeys(generatedEmail);
+        sendKeys(receiverField,generatedEmail);
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(emailTextField));
-        driver.findElement(emailTextField).sendKeys(emailText);
+        sendKeys(emailTextField,emailText);
 
         wait.until(ExpectedConditions.presenceOfElementLocated(sendButton));
         driver.findElement(sendButton).click();
-
-
-
-
-
 
         return this;
     }

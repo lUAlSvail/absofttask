@@ -46,30 +46,25 @@ public class GetNada {
         System.out.println(new_tab_index);
         driver.switchTo().window(tab_handles.toArray()[new_tab_index].toString());
         File screenshotCat = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(screenshotCat,new File("/home/svail/IdeaProjects/absofttask/Cat"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         driver.switchTo().window(tab_handles.toArray()[new_tab_index-1].toString());
         File screenshotDog = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(screenshotDog,new File("/home/svail/IdeaProjects/absofttask/Dog"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         driver.switchTo().window(tab_handles.toArray()[new_tab_index-2].toString());
         File screenshotFox = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+
         try {
-            FileUtils.copyFile(screenshotFox,new File("/home/svail/IdeaProjects/absofttask/Fox"));
+            FileUtils.copyFile(screenshotCat,new File(Configuration.CAT));
+            FileUtils.copyFile(screenshotDog,new File(Configuration.DOG));
+            FileUtils.copyFile(screenshotFox,new File(Configuration.FOX));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         return Email;
     }
-    public GetNada getLink(){
-        driver.findElement(textOfMessage).click();
-        return this;
-    }
+
+
 
 }
